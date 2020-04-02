@@ -96,7 +96,7 @@ export default {
 <style lang="less" scoped>
 @left-bgColor: #fff;
 @iconlink: #ff6c60;
-.meni_left {
+.menu_left {
   position: absolute;
   top: 0;
   left: 0;

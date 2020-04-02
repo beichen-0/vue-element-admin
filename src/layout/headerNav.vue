@@ -1,14 +1,10 @@
 <template>
-  <header
-    class="header_nav rflex"
-    :style="{'width': headNavWidth + 'px'}"
-    id="header_container"
-  >
-    <div class="right_nav" ref="rightNav">
-      <top-menu />
-      <div class="userinfo_right rflex">
-        <div class="notify_row">
-          <ul class="top_menu">
+  <header class="head-nav rflex" :style="{'width':headNavWidth+'px'}" id="header_container">
+    <div class="right-nav" ref="rightNav">
+      <top-menu></top-menu>
+      <div class="userinfo-right rflex">
+        <div class="notify-row">
+          <ul class="top-menu">
             <li class="li-badge">
               <el-tooltip class="item" effect="dark" content="访问github" placement="top">
                 <a :href="github" target="_blank">
@@ -51,38 +47,35 @@
           </ul>
         </div>
         <div class="userinfo">
-          <el-menu
-            class="el-menu-demo"
-            mode="horizontal"
-          >
-            <el-submenu index="1">
+          <el-menu class="el-menu-demo" mode="horizontal">
+            <el-submenu index="1" popper-class="langItem">
               <template slot="title">
-                <img :src="langLogo" class="langAvatar" alt="">
+                <img :src="langLogo" class="langAvatar" alt />
               </template>
               <el-menu-item index="1-1" @click="changeLocale('zh')">
-                <img :src="chinaImg" class="langAvatar" alt="">
+                <img :src="chinaImg" class="langAvatar" alt />
                 <span class="intro">中文</span>
               </el-menu-item>
               <el-menu-item index="1-2" @click="changeLocale('en')">
-                <img :src="americaImg" class="langAvatar" alt="">
+                <img :src="americaImg" class="langAvatar" alt />
                 <span class="intro">EngList</span>
               </el-menu-item>
             </el-submenu>
-            <el-submenu index="2">
+
+            <el-submenu index="2" popper-class="infoItem">
               <template slot="title">
                 <div class="welcome">
-                  <span class="name">{{ $t('commons.hi') }},</span>
-                  <span class="name avatarname">{{ $t(`commons.${name}`) }}</span>
-                  <img :src="avatar" class="avatar" alt="">
+                  <span class="name">{{$t('commons.hi')}},</span>
+                  <span class="name avatarname">{{ $t(`commons.${name}`)}}</span>
                 </div>
+                <img :src="avatar" class="avatar" alt />
               </template>
               <el-menu-item index="2-1" @click="setDialogInfo('info')">{{ $t('commons.infoShow') }}</el-menu-item>
-              <el-menu-item index="2-2" @click="setDialogInfo('pass')">
-                {{ $t('commons.infoModify') }}
-              </el-menu-item>
-              <el-menu-item index="2-3" @click="setDialogInfo('logout')">
-                {{ $t('commons.quit') }}
-              </el-menu-item>
+              <el-menu-item
+                index="2-2"
+                @click="setDialogInfo('pass')"
+              >{{ $t('commons.infoModify') }}</el-menu-item>
+              <el-menu-item index="2-3" @click="setDialogInfo('logout')">{{ $t('commons.quit') }}</el-menu-item>
             </el-submenu>
           </el-menu>
         </div>
@@ -92,27 +85,27 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import store from '@/store'
+import { mapGetters } from "vuex";
+import store from "@/store";
 
-import * as mUtils from '@/utils/mutils'
-import { setToken, getToken } from '@/utils/auth'
-import { github } from "@/utils/env"
+import * as mUtils from "@/utils/mutils";
+import { setToken, getToken } from "@/utils/auth";
+import { github } from "@/utils/env";
 
-import topMenu from './topMenu.vue'
+import topMenu from "./topMenu.vue";
 
-import wechatImg from '@/assets/img/wechat.jpg'
-import qqImg from '@/assets/img/qq.png'
-import logoImg from '@/assets/img/logo.png'
-import chinaImg from '@/assets/img/china.svg'
-import americaImg from '@/assets/img/america.svg'
+import wechatImg from "@/assets/img/wechat.jpg";
+import qqImg from "@/assets/img/qq.png";
+import logoImg from "@/assets/img/logo.png";
+import chinaImg from "@/assets/img/china.svg";
+import americaImg from "@/assets/img/america.svg";
 
 export default {
-  name: 'header-nav',
+  name: "header-nav",
   data() {
     return {
       logo: logoImg,
-      langLogo: getToken('langLogo') || americaImg,
+      langLogo: getToken("langLogo") || americaImg,
       chinaImg: chinaImg,
       americaImg: americaImg,
       wechat: {
@@ -125,99 +118,94 @@ export default {
       },
       github: github,
       menu: {
-        userBgColor: '#f0f2f5'
+        userBgColor: "#f0f2f5"
       }
-    }
+    };
   },
   components: {
     topMenu
   },
   computed: {
-    ...mapGetters(['name', 'avatar', 'sidebar']),
+    ...mapGetters(["name", "avatar", "sidebar"]),
     headNavWidth() {
-      return document.body.clientWidth - this.sidebar.width
+      return document.body.clientWidth - this.sidebar.width;
     }
   },
   methods: {
-    showWechat () {
-      this.wechat.isWechat = true
+    showWechat() {
+      this.wechat.isWechat = true;
     },
     hideWechat() {
-      this.wechat.isWechat = false
+      this.wechat.isWechat = false;
     },
     showQq() {
-      this.qq.isQq = true
+      this.qq.isQq = true;
     },
     hideQq() {
-      this.qq.isQq = false
+      this.qq.isQq = false;
     },
     logout() {
-      this.$store.dispatch('logout')
-        .then(() => {
-          location.reload()
-        })
+      this.$store.dispatch("logout").then(() => {
+        location.reload();
+      });
     },
     /**
      * 弹出框-修改密码或者系统设置
-     * @param {string} cmditem 弹出类型 
-    */
+     * @param {string} cmditem 弹出类型
+     */
     setDialogInfo(cmditem) {
-      switch(cmditem) {
-        case 'info':
-          this.$router.push('/infoManage/infoShow/infoShow1')
-          break
-        case 'pass':
-          this.$router.push('/infoManage/infoModify/infoModify1')
-          break
-        case 'logout':
-          this.logout()
-          break
+      switch (cmditem) {
+        case "info":
+          this.$router.push("/infoManage/infoShow/infoShow1");
+          break;
+        case "pass":
+          this.$router.push("/infoManage/infoModify/infoModify1");
+          break;
+        case "logout":
+          this.logout();
+          break;
       }
     },
     // 切换语言
     changeLocale(type) {
-      setToken('lang', type)
-      this.$i18n.locale = type
-      if(type === 'en') {
-        this.langLogo = this.americaImg
+      setToken("lang", type);
+      this.$i18n.locale = type;
+      if (type === "en") {
+        this.langLogo = this.americaImg;
       } else {
-        this.langLogo = this.chinaImg
+        this.langLogo = this.chinaImg;
       }
-      setToken('langLogo', this.langLogo)
+      setToken("langLogo", this.langLogo);
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
-.right_nav {
+.right-nav {
   display: flex;
   flex: 1;
   width: calc(100% - 180px);
   padding-right: 15px;
   justify-content: space-between;
-  box-shadow: 0px 2px 5px 0px rgba(237, 233, 233, .5);
+  box-shadow: 0px 2px 5px 0px rgba(237, 233, 233, 0.5);
 }
-.header_nav {
+.head-nav {
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 10;
-  transition: width .2s;
+  z-index: 29;
+  transition: width 0.2s;
   justify-content: space-between;
   height: 60px;
   box-sizing: border-box;
-  background-color: #fff;
+  background: #fff;
   .logout {
-    vertical-align: center; // 文字与图片的对齐方式
+    vertical-align: middle;
     cursor: pointer;
   }
 }
-.middle {
-  align-items: center;
-  border: 1px solid;
-}
-.userinfo_right {
+.userinfo-right {
   width: 320px;
   padding: 0 10px;
   justify-content: space-between;
@@ -233,7 +221,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
-.lanAvatar {
+.langAvatar {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -251,18 +239,19 @@ export default {
   }
   .avatarname {
     color: #a9d86e;
-    font-weight: border;
+    font-weight: bolder;
     font-size: 13px;
   }
 }
+
 .username {
   cursor: pointer;
-  margin-left: 5px;
+  margin-right: 5px;
 }
 .border {
   border: 1px solid;
 }
-.notify_row {
+.notify-row {
   line-height: 60px;
   flex: 1;
   ul {
@@ -270,7 +259,8 @@ export default {
     justify-content: space-around;
   }
 }
-ul.top_menu > li {
+
+ul.top-menu > li {
   position: relative;
 }
 </style>
