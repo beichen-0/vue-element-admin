@@ -1,6 +1,6 @@
 <template>
   <section class="data_section" ref="data_section">
-    <a href="h" target="_blank">
+    <a :href="github" target="_blank">
       <el-row :gutter="10" class="row_list">
         <el-col :span="8">
           <div class="row_left row_base">
@@ -139,11 +139,11 @@ import salesTable from "./components/salesTable"; // 销售数据表格
 import commentList from "./components/commentList"; // 用户评论列表
 import cardList from "./components/cardList"; // card列表
 import logList from "./components/logList"; // 日志列表
-import barChart from 'cps/echarts/barChart' // 用户投资类型 柱状图
-import pieChart from 'cps/echarts/pieChart' // 用户投资类型 饼状图
-import lineChart from 'cps/echarts/lineChart' // 用户投资类型 折线图
-import radarChart from 'cps/echarts/radarChart' // 用户投资类型 雷达图
-import { github } from '@/utils/env'
+import barChart from "cps/echarts/barChart"; // 用户投资类型 柱状图
+import pieChart from "cps/echarts/pieChart"; // 用户投资类型 饼状图
+import lineChart from "cps/echarts/lineChart"; // 用户投资类型 折线图
+import radarChart from "cps/echarts/radarChart"; // 用户投资类型 雷达图
+import { github } from "@/utils/env";
 
 export default {
   components: {
@@ -159,7 +159,7 @@ export default {
   data() {
     return {
       github: github
-    }
+    };
   }
 };
 </script>

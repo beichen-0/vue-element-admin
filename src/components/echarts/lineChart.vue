@@ -3,29 +3,36 @@
 </template>
 
 <script>
-import echarts from "echarts"
-import echartsTheme from "cps/echarts/theme/westerors"
+import echarts from "echarts";
+import echartsTheme from "cps/echarts/theme/westeros.json";
 
 export default {
   data() {
     return {
       id: "lineChart",
       myChart: null
-    }
+    };
   },
   mounted() {
     this.loadChart();
   },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
+  },
   methods: {
     loadChart() {
       this.$nextTick(() => {
-        echarts.registerTheme('westeros', echartsTheme)
+        echarts.registerTheme("westeros", echartsTheme);
         this.myChart = echarts.init(
           document.getElementById(this.id),
           "westeros"
-        )
-        this.myChart.setOption(this.initOption())
-      })
+        );
+        this.myChart.setOption(this.initOption());
+      });
     },
     initOption() {
       let data = {
@@ -37,14 +44,14 @@ export default {
           axisPointer: {
             type: "cross",
             label: {
-              backgroundColoe: "#6a7985"
+              backgroundColor: "#6a7985"
             }
           }
         },
         legend: {
           data: ["股票", "基金", "债券", "储蓄", "期货"]
         },
-        grid: { // 直角坐标系内绘图网格
+        grid: {
           left: "3%",
           right: "4%",
           bottom: "3%",
@@ -53,7 +60,7 @@ export default {
         xAxis: [
           {
             type: "category",
-            boundarGap: false,
+            boundaryGap: false,
             data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
           }
         ],
@@ -109,16 +116,13 @@ export default {
       return data;
     }
   },
-  beforeDestroy() {
-    if(!this.myChart) {
-      return;
-    }
-    this.myChart.dispose();
-    this.myChart = null
+  watch: {
+    // id:()=>{
+    //     this.initOption()
+    // }
   }
-}
+};
 </script>
 
-<style>
-
+<style lang="less">
 </style>

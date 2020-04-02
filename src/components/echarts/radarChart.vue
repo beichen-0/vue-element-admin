@@ -4,8 +4,10 @@
 
 <script>
 import echarts from "echarts";
-import echartsTheme from "cps/echarts/theme/westerors.json";
+import echartsTheme from "cps/echarts/theme/westeros.json";
+
 export default {
+  name: "radarChart",
   data() {
     return {
       id: "radarChart",
@@ -14,6 +16,13 @@ export default {
   },
   mounted() {
     this.loadChart();
+  },
+  beforeDestroy() {
+    if (!this.myChart) {
+      return;
+    }
+    this.myChart.dispose();
+    this.myChart = null;
   },
   methods: {
     loadChart() {
@@ -27,12 +36,15 @@ export default {
         radar: [
           {
             name: {
-              fontSize: 11 // 顶点字体大小，不能设置radio否则不能生效
+              fontSize: 11 // 顶点字体大小 不能设置 radio 否则不能生效
             },
             splitLine: {
               lineStyle: {
                 color: "#00aaff" // 每一圈的边界颜色
               }
+            },
+            axisLabel: {
+              inside: true
             },
             axisLine: {
               lineStyle: {
@@ -41,50 +53,18 @@ export default {
             },
             splitArea: {
               areaStyle: {
-                // color: ["#00aaff", "#0099ff", "#00aaff", "#0099ff", "#00aaff"] // 每一圈的颜色
+                // color: ['#00aaff', '#0099ff', '#00aaff', '#0099ff', '#00aaff'] // 每一圈的颜色
               }
             },
             indicator: [
-              {
-                text: "华东区域",
-                max: 100,
-                color: "#87de75" // 选中的颜色
-              },
-              {
-                text: "华南区域",
-                max: 100,
-                color: "#FFA3A1"
-              },
-              {
-                text: "华中区域",
-                max: 100,
-                color: "#FF9900"
-              },
-              {
-                text: "华北区域",
-                max: 100,
-                color: "#5FB4FA"
-              },
-              {
-                text: "西北区域",
-                max: 100,
-                color: "#a9d86e"
-              },
-              {
-                text: "西南区域",
-                max: 100,
-                color: "#FF6C60"
-              },
-              {
-                text: "东北区域",
-                max: 100,
-                color: "#18a689"
-              },
-              {
-                text: "港澳台",
-                max: 100,
-                color: "#3b5999"
-              }
+              { text: "东北区域", max: 100, color: "#87DE75" }, // 选中颜色
+              { text: "华南区域", max: 100, color: "#FFA3A1" },
+              { text: "华中区域", max: 100, color: "#FF9900" },
+              { text: "华北区域", max: 100, color: "#5FB4FA" },
+              { text: "西北区域", max: 100, color: "#a9d86e" },
+              { text: "西南区域", max: 100, color: "#FF6C60" },
+              { text: "东北区域", max: 100, color: "#18a689" },
+              { text: "港澳台", max: 100, color: "#3b5999" }
             ]
           }
         ],
@@ -97,7 +77,7 @@ export default {
                 areaStyle: {
                   normal: {
                     opacity: 0.8, // 图表透明度
-                    color: "#87de75"
+                    color: "#87DE75" // 图表颜色
                   }
                 },
                 lineStyle: {
@@ -107,7 +87,7 @@ export default {
                   normal: {
                     show: true,
                     color: "#6397ff", // 顶点数字颜色
-                    fontSize: 16,
+                    fontSize: 16, // 顶点数字大小
                     formatter: function(params) {
                       return params.value;
                     }
@@ -121,13 +101,9 @@ export default {
       return option;
     }
   },
-  beforeDestroy() {
-    if(!this.myChart) return;
-    this.myChart.dispose();
-    this.myChart = null;
-  }
+  watch: {}
 };
 </script>
 
-<style>
+<style lang="less">
 </style>

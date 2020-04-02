@@ -4,7 +4,7 @@
 
 <script>
 import echarts from 'echarts'
-import echartsTheme from 'cps/echarts/theme/westerors.json'
+import echartsTheme from 'cps/echarts/theme/westeros.json'
 export default {
   name: 'barChat',
   data() {
