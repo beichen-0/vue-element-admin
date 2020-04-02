@@ -12,7 +12,7 @@
         <el-form :model="loginForm" :rules="rules" ref="loginForm" class="loginForm">
           <el-form-item prop="username" class="login-item">
             <span class="loginTips">
-              <!-- <icon-svg icon-class="iconuser" /> -->
+              <icon-svg icon-class="iconuser" />
             </span>
             <el-input
               @keyup.enter.native="submitForm('loginForm')"
@@ -24,7 +24,7 @@
           </el-form-item>
           <el-form-item prop="password" class="login-item">
             <span class="loginTips">
-              <!-- <icon-svg icon-class="iconLock" /> -->
+              <icon-svg icon-class="iconLock" />
             </span>
             <el-input
               @keyup.enter.native="submitForm('loginForm')"

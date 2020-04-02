@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import { Layout, Content } from '../layout'
 import { topRouterMap } from './topRouter'
-import { Progress } from 'element-ui'
+
+// 引入组件
 import Login from '@/views/login.vue'
+import { Layout, Content } from '../layout'
+import Index from '@/views/index/index.vue'
 
 process.env.NODE_ENV === 'development' ? Vue.use(Router) : null
 
@@ -33,12 +35,39 @@ export const constantRouterMap = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  // {
+  //   path: '',
+  //   component: Layout,
+  //   redirect: '/index/index',
+  //   hidden: true
+  // },
+  {
+    path: '/index',
+    name: 'index',
+    component: Layout,
+    meta: {
+      title: '首页',
+      icon: 'icondashboard'
+    },
+    noDropdown: true,
+    children: [
+      {
+        path: 'index',
+        meta: {
+          title: '首页',
+          icon: 'icondashboard',
+          routerType: 'leftmenu'
+        },
+        component: Index
+      }
+    ]
   }
 ]
 
 export default new Router({
   mode: 'history', // 默认为'hash'模式
-  // base: '/permission/', // 添加跟目录,对应服务器部署子目录
+  base: '/permission/', // 添加跟目录,对应服务器部署子目录
   routes: constantRouterMap
 })
 

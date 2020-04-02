@@ -1,5 +1,5 @@
 // 存放一些全局的组件
 import Vue from 'vue'
-import IconSvg from '.'
+import IconSvg from './IconSvg.vue'
 //全局注册icon-svg
 Vue.component('icon-svg', IconSvg)

@@ -110,10 +110,10 @@ const permission = {
         resolve()
       })
     },
-    ClickLeftInnerMenu({ commit }, data) {
+    clickLeftInnerMenu({ commit }, data) {
       commit('CLICK_INNER_LEFT_MENU', data)
     },
-    ClickTopMenu({ commit }, data) {
+    clickTopMenu({ commit }, data) {
       commit('CLICK_TOP_MENU', data)
     }
   }
