@@ -6,6 +6,7 @@ import { topRouterMap } from './topRouter'
 import Login from '@/views/login.vue'
 import { Layout, Content } from '../layout'
 import Index from '@/views/index/index.vue'
+import userList from '@/views/userList/userList.vue'
 
 process.env.NODE_ENV === 'development' ? Vue.use(Router) : null
 
@@ -36,12 +37,12 @@ export const constantRouterMap = [
     name: 'Login',
     component: Login
   },
-  // {
-  //   path: '',
-  //   component: Layout,
-  //   redirect: '/index/index',
-  //   hidden: true
-  // },
+  {
+    path: '',
+    component: Layout,
+    redirect: '/index/index',
+    hidden: true
+  },
   {
     path: '/index',
     name: 'index',
@@ -72,4 +73,26 @@ export default new Router({
 })
 
 // 异步路由（需要权限的页面）
-export const asyncRouterMap = []
+export const asyncRouterMap = [
+  {
+    path: "/userManger",
+    name: "userManage",
+    component: Layout,
+    meta: {
+      title: "用户管理",
+      icon: "iconuser"
+    },
+    noDropdown: true,
+    children: [
+      {
+        path: "userList",
+        meta: {
+          title: "用户管理",
+          icon: "iconuser",
+          routerType: "leftmenu"
+        },
+        component: userList
+      }
+    ]
+  }
+]

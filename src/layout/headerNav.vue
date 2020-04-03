@@ -145,7 +145,7 @@ export default {
       this.qq.isQq = false;
     },
     logout() {
-      this.$store.dispatch("logout").then(() => {
+      this.$store.dispatch("logOut").then(() => {
         location.reload();
       });
     },
