@@ -193,6 +193,7 @@ export const isInteger = (s) => {
   return re.test(s)
 }
 
+// 设置主题内容的高度
 export const setContentHeight = (that, ele, height) => {
   that.$nextTick(() => {
     ele.style.height = (document.body.clientHeight - height) + 'px'

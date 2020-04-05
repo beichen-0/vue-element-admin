@@ -7,6 +7,7 @@ import Login from '@/views/login.vue'
 import { Layout, Content } from '../layout'
 import Index from '@/views/index/index.vue'
 import userList from '@/views/userList/userList.vue'
+import share from "@/views/share"
 
 process.env.NODE_ENV === 'development' ? Vue.use(Router) : null
 
@@ -94,5 +95,26 @@ export const asyncRouterMap = [
         component: userList
       }
     ]
-  }
+  },
+  {
+    path: "/share",
+    name: "share",
+    component: Layout,
+    meta: {
+      title: "分享功能",
+      icon: "iconshare"
+    },
+    noDropdown: true,
+    children: [
+      {
+        path: "share",
+        meta: {
+          title: "分享功能",
+          icon: "iconshare",
+          routerType: "leftmenu"
+        },
+        component: share
+      }
+    ]
+  },
 ]

@@ -135,5 +135,10 @@ export default {
   margin-top: 3px;
   z-index: 10;
   box-shadow: 0 0 10px 0 rgba(230, 224, 224, .5);
+  .dropItem {
+    span {
+      padding-left: 16px;
+    }
+  }
 }
 </style>
