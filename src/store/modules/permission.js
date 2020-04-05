@@ -1,6 +1,8 @@
 import { asyncRouterMap, constantRouterMap } from '@/routes'
-import { topRouterMap } from "@/routes/topRouter"
+import { topRouterMap } from "@/routes/topRouter";
 import * as mutils from '@/utils/mutils'
+
+
 
 // 循环追加顶栏菜单
 function addTopRouter() {

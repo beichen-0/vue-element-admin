@@ -43,7 +43,7 @@ export default {
       const titleList = this.$route.matched[1].meta.titleList
       const currentTitle = titleList && this.$route.matched[2].meta.title
       if( titleList && this.$route.matched[1].meta.routerType === 'leftmenu' ) { // 点击的为 左侧的2级菜单
-        this.$store.dispatch('clickLeftMenu', { 'titleList': titleList })
+        this.$store.dispatch('clickLeftInnerMenu', { 'titleList': titleList })
         this.$store.dispatch('clickTopMenu', { 'title': currentTitle })
       } else {
         this.$store.dispatch('clickLeftInnerMenu', { 'titleList': [] })

@@ -5,7 +5,9 @@ process.env.NODE_ENV === "development" && import('nprogress/nprogress.css')
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth' // 验权(从cookie中获取)
 import { getUserInfo } from "@/api/user";
-import { setTitle } from '@/utils/mutils' // 设置浏览器头部标题
+import {
+  setTitle
+} from '@/utils/mutils' // 设置浏览器头部标题
 
 function hasPermission(roles, permissionRoles) {
   if (roles.indexOf('admin') >= 0) return true
@@ -30,29 +32,25 @@ router.beforeEach((to, from, next) => {
       // 用户登录成功之后，每次点击路由都进行了角色的判断;
       if (store.getters.roles.length === 0) {
         let token = getToken('Token');
-        getUserInfo({ "token": token })
-          .then().then(res => { // 根据token拉取用户信息
-            let userList = res.data.userList;
-            store.commit("SET_ROLES", userList.roles);
-            store.commit("SET_NAME", userList.name);
-            store.commit("SET_AVATAR", userList.avatar);
-            store.dispatch('GenerateRoutes', { "roles": userList.roles })
-              .then(() => { // 根据roles权限生成可访问的路由表
-                router.addRoutes(store.getters.addRouters) // 动态添加可访问权限路由表
-                next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
-              })
+        getUserInfo({ "token": token }).then().then(res => { // 根据token拉取用户信息
+          let userList = res.data.userList;
+          store.commit("SET_ROLES", userList.roles);
+          store.commit("SET_NAME", userList.name);
+          store.commit("SET_AVATAR", userList.avatar);
+          store.dispatch('GenerateRoutes', { "roles": userList.roles }).then(() => { // 根据roles权限生成可访问的路由表
+            router.addRoutes(store.getters.addRouters) // 动态添加可访问权限路由表
+            next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
           })
-          .catch((err) => {
-            store.dispatch('logOut')
-              .then(() => {
-                Message.error(err || '获取权限失败，请重新登录')
-                next({ path: '/' })
-              })
+        }).catch((err) => {
+          store.dispatch('LogOut').then(() => {
+            Message.error(err || 'Verification failed, please login again')
+            next({ path: '/' })
           })
+        })
       } else {
         // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
         if (hasPermission(store.getters.roles, to.meta.roles)) {
-          next()//
+          next()
         } else {
           next({ path: '/401', replace: true, query: { noGoBack: true } })
         }

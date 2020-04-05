@@ -117,4 +117,73 @@ export const asyncRouterMap = [
       }
     ]
   },
+  {
+    path: "/infoManage",
+    name: "infoManage",
+    meta: {
+      title: "信息管理",
+      icon: "iconinfo"
+    },
+    component: Layout,
+    children: [
+      {
+        path: "infoShow",
+        name: "infoShow",
+        meta: {
+          title: "个人信息",
+          icon: "iconinfo",
+          routerType: "leftmenu",
+          titleList: [
+            {
+              "path": "infoShow1",
+              "title": "个人信息子菜单1"
+            },
+            {
+              "path": "infoShow2",
+              "title": "个人信息子菜单2"
+            },
+            {
+              "path": "infoShow3",
+              "title": "个人信息子菜单3"
+            },
+            {
+              "path": "infoShow4",
+              "title": "个人信息子菜单4"
+            },
+            {
+              "path": "infoShow5",
+              "title": "个人信息子菜单5"
+            }
+          ]
+        },
+        component: Content,
+        children: filterTopRouterMap("infoShow")
+      },
+      {
+        path: "infoModify",
+        name: "infoModify",
+        meta: {
+          title: "修改信息",
+          icon: "iconinfo",
+          routerType: "leftmenu",
+          titleList: [
+            {
+              "path": "infoModify1",
+              "title": "修改信息子菜单1"
+            },
+            {
+              "path": "infoModify2",
+              "title": "修改信息子菜单2"
+            },
+            {
+              "path": "infoModify3",
+              "title": "修改信息子菜单3"
+            }
+          ]
+        },
+        component: Content,
+        children: filterTopRouterMap('infoModify')
+      }
+    ]
+  }
 ]
