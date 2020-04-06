@@ -1,7 +1,7 @@
-import request from '@/utils/axios'
+import axios from '@/utils/axios'
 
 export const getSalesTableList = params => {
-  return request({
+  return axios({
     url: '/sales/get',
     method: 'get',
     params: params

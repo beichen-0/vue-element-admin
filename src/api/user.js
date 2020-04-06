@@ -1,15 +1,15 @@
-import request from '@/utils/axios'
+import axios from '@/utils/axios'
 
 
 export function login(params) {
-  return request({
+  return axios({
     url: '/user/login',
     method: 'get',
     data: params
   })
 }
 export function logout(params) {
-  return request({
+  return axios({
     url: '/user/logout',
     method: 'get',
     data: params
@@ -18,7 +18,7 @@ export function logout(params) {
 
 
 export function getUserInfo(params) {
-  return request({
+  return axios({
     url: '/user/info/get',
     method: 'get',
     data: params
@@ -26,7 +26,7 @@ export function getUserInfo(params) {
 }
 
 export function getUserList(reqData) {
-  return request({
+  return axios({
     url: '/user/list/get',
     method: 'get',
     data: reqData

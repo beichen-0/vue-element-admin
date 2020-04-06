@@ -7,12 +7,14 @@ if (process.env.NODE_ENV === "development") {
 import user from './modules/user'
 import permission from './modules/permission'
 import menu from './modules/menu'
+import money from './modules/money'
 
 export default new Vuex.Store({
   modules: {
     user,
     permission,
-    menu
+    menu,
+    money
   }
 });
 

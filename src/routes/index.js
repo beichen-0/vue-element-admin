@@ -7,6 +7,8 @@ import Login from '@/views/login.vue'
 import { Layout, Content } from '../layout'
 import Index from '@/views/index/index.vue'
 import userList from '@/views/userList/userList.vue'
+import fundList from "@/views/fundList/fundList.vue"
+import chinaTabsList from "@/views/fundList/chinaTabsList.vue"
 import share from "@/views/share"
 
 process.env.NODE_ENV === 'development' ? Vue.use(Router) : null
@@ -183,6 +185,35 @@ export const asyncRouterMap = [
         },
         component: Content,
         children: filterTopRouterMap('infoModify')
+      }
+    ]
+  },
+  {
+    path: "/fundManage",
+    name: "fundManage",
+    meta: {
+      title: "资金管理",
+      icon: "iconpay3"
+    },
+    component: Layout,
+    children: [
+      {
+        path: "fundList",
+        name: "fundList",
+        meta: {
+          title: "资金流水",
+          routerType: "letmenu"
+        },
+        component: fundList
+      },
+      {
+        path: "chinaTabsList",
+        name: "chinaTabsList",
+        meta: {
+          title: "区域投资",
+          routerType: "letmenu"
+        },
+        component: chinaTabsList
       }
     ]
   }

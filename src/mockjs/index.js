@@ -2,7 +2,7 @@
 import Mock from 'mockjs'
 // process.env.NODE_ENV === "development" ? Vue.use(Mock) : null;
 
-// import tableAPI from './money'
+import tableAPI from './money'
 import salesAPI from './sales'
 import userAPI from './user'
 
@@ -12,11 +12,11 @@ Mock.setup({
 })
 
 // 资金相关
-// Mock.mock(/\/money\/get/, 'get', tableAPI.getMoneyList)
-// Mock.mock(/\/money\/remove/, 'get', tableAPI.deleteMoney)
-// Mock.mock(/\/money\/batchremove/, 'get', tableAPI.batchremoveMoney)
-// Mock.mock(/\/money\/add/, 'get', tableAPI.createMoney)
-// Mock.mock(/\/money\/edit/, 'get', tableAPI.updateMoney)
+Mock.mock(/\/money\/get/, 'get', tableAPI.getMoneyList)
+Mock.mock(/\/money\/remove/, 'get', tableAPI.deleteMoney)
+Mock.mock(/\/money\/batchremove/, 'get', tableAPI.batchremoveMoney)
+Mock.mock(/\/money\/add/, 'get', tableAPI.createMoney)
+Mock.mock(/\/money\/edit/, 'get', tableAPI.updateMoney)
 // sales相关
 Mock.mock(/\/sales\/get/, 'get', salesAPI.getSalesList)
 // user相关
