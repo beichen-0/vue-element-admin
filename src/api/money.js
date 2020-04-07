@@ -16,7 +16,7 @@ export const addMoney = params => {
   })
 }
 
-export const removerMoney = params => {
+export const removeMoney = params => {
   return axios({
     url: "/money/remove",
     method: "get",

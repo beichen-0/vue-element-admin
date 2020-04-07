@@ -9,6 +9,9 @@ import Index from '@/views/index/index.vue'
 import userList from '@/views/userList/userList.vue'
 import fundList from "@/views/fundList/fundList.vue"
 import chinaTabsList from "@/views/fundList/chinaTabsList.vue"
+import fundPosition from "@/views/fundData/fundPosition.vue"
+import typePosition from "@/views/fundData/typePosition.vue"
+import incomePayPosition from "@/views/fundData/incomePayPosition.vue"
 import share from "@/views/share"
 
 process.env.NODE_ENV === 'development' ? Vue.use(Router) : null
@@ -214,6 +217,42 @@ export const asyncRouterMap = [
           routerType: "letmenu"
         },
         component: chinaTabsList
+      }
+    ]
+  },
+  {
+    path: "/fundData",
+    name: "fundData",
+    meta: {
+      title: "资金数据",
+      icon: "iconecharts",
+    },
+    component: Layout,
+    redirect: "/fondData/fundPosition",
+    children: [
+      {
+        path: "fundPosition",
+        name: "fundPosition",
+        meta: {
+          title: "投资分布"
+        },
+        component: fundPosition
+      },
+      {
+        path: "typePosition",
+        name: "typePosition",
+        meta: {
+          title: "项目分布"
+        },
+        component: typePosition
+      },
+      {
+        path: "incomePayPosition",
+        name: "incomePayPosition",
+        meta: {
+          title: "收支统计"
+        },
+        component: incomePayPosition
       }
     ]
   }
