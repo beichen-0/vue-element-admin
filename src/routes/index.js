@@ -13,6 +13,10 @@ import fundPosition from "@/views/fundData/fundPosition.vue"
 import typePosition from "@/views/fundData/typePosition.vue"
 import incomePayPosition from "@/views/fundData/incomePayPosition.vue"
 import share from "@/views/share"
+import page from "@/views/permission/page.vue"
+import directive from "@/views/permission/directive.vue"
+import page401 from "@/views//errorPage/401"
+import page404 from "@/views//errorPage/404"
 
 process.env.NODE_ENV === 'development' ? Vue.use(Router) : null
 
@@ -255,5 +259,69 @@ export const asyncRouterMap = [
         component: incomePayPosition
       }
     ]
+  },
+  {
+    path: "/permission",
+    name: "permission",
+    meta: {
+      title: "权限设置",
+      icon: "iconpermission",
+      roles: ["admin", "editor"]
+    },
+    component: Layout,
+    children: [
+      {
+        path: "page",
+        name: "pagePer",
+        meta: {
+          title: "页面权限",
+          roles: ["admin"]
+        },
+        component: page
+      },
+      {
+        path: "directive",
+        name: "directivePer",
+        meta: {
+          title: "按钮权限",
+          roles: ["editor"]
+        },
+        component: directive
+      }
+    ]
+  },
+  {
+    path: "/error",
+    component: Layout,
+    name: "errorPage",
+    meta: {
+      title: "错误页面",
+      icon: "iconError"
+    },
+    children: [
+      {
+        path: "401",
+        name: "page401",
+        meta: {
+          title: "401",
+          noCache: true
+        },
+        component: page401
+      },
+      {
+        path: "404",
+        name: "page404",
+        meta: {
+          title: "404",
+          noCache: true
+        },
+        component: page404
+      }
+    ]
+  },
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true 
   }
 ]

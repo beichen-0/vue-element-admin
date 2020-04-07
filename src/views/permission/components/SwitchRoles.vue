@@ -1,0 +1,43 @@
+<template>
+  <div>
+    <div class="ownPer">我的权限：{{roles}}</div>
+    <div class="rflex">
+      <p>切换权限：</p>
+      <el-radio-group v-model="switchRoles">
+        <el-radio-button label="editor"></el-radio-button>
+        <el-radio-button label="admin"></el-radio-button>
+      </el-radio-group>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  computed: {
+    roles() {
+      return this.$store.getters.roles
+    },
+    switchRoles: {
+      get() {
+        return this.roles[0]
+      },
+      set(val) {
+        this.$store.dispatch("ChangeRoles", val)
+          .then(() => {
+            this.$emit("change")
+          })
+      }
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.ownPer {
+  margin-bottom: 20px;
+}
+.rflex {
+  align-items: center;
+  margin-bottom: 20px;
+}
+</style>
